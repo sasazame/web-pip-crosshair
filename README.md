@@ -2,6 +2,8 @@
 
 Picture-in-Pictureウィンドウにレティクルを表示する、依存関係なしの静的Webツールです。
 
+https://sasazame.github.io/web-pip-crosshair/
+
 ## ローカルで確認
 
 `index.html`を直接開くか、任意の静的Webサーバーで配信します。
