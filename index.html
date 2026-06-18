@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b0d10" />
+    <meta
+      name="description"
+      content="Picture-in-Pictureを使って、画面上にレティクルを表示するシンプルなWebツール"
+    />
+    <title>PiP Reticle</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="hero">
+        <div class="brand-row">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="eyebrow">PICTURE-IN-PICTURE UTILITY</span>
+        </div>
+        <h1>狙点を、画面の上に。</h1>
+        <p class="lead">
+          好みのレティクルを作り、常に手前に表示される小さなウィンドウとして起動します。
+        </p>
+      </header>
+
+      <section class="workspace" aria-label="レティクル設定">
+        <div class="preview-panel">
+          <div class="panel-heading">
+            <span>PREVIEW</span>
+            <span class="live-indicator"><i></i> LIVE</span>
+          </div>
+          <div class="preview-stage">
+            <canvas id="previewCanvas" width="640" height="360" aria-label="レティクルのプレビュー"></canvas>
+          </div>
+          <p class="preview-note">PiPウィンドウをドラッグして、画面中央に配置してください。</p>
+        </div>
+
+        <form class="controls" id="controls">
+          <fieldset>
+            <legend>STYLE</legend>
+            <div class="style-grid" role="radiogroup" aria-label="レティクルの形">
+              <label class="style-option">
+                <input type="radio" name="style" value="cross" checked />
+                <span class="style-icon icon-cross" aria-hidden="true"></span>
+                <span>十字</span>
+              </label>
+              <label class="style-option">
+                <input type="radio" name="style" value="dot" />
+                <span class="style-icon icon-dot" aria-hidden="true"></span>
+                <span>ドット</span>
+              </label>
+              <label class="style-option">
+                <input type="radio" name="style" value="circle" />
+                <span class="style-icon icon-circle" aria-hidden="true"></span>
+                <span>サークル</span>
+              </label>
+              <label class="style-option">
+                <input type="radio" name="style" value="cross-dot" />
+                <span class="style-icon icon-cross-dot" aria-hidden="true"></span>
+                <span>複合</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>APPEARANCE</legend>
+            <label class="control-row color-row">
+              <span>カラー</span>
+              <span class="color-control">
+                <input id="color" type="color" value="#ff3b30" />
+                <output id="colorValue" for="color">#FF3B30</output>
+              </span>
+            </label>
+            <label class="control-row">
+              <span>サイズ</span>
+              <span class="range-control">
+                <input id="size" type="range" min="8" max="100" value="42" />
+                <output id="sizeValue" for="size">42</output>
+              </span>
+            </label>
+            <label class="control-row">
+              <span>太さ</span>
+              <span class="range-control">
+                <input id="thickness" type="range" min="1" max="12" value="3" />
+                <output id="thicknessValue" for="thickness">3</output>
+              </span>
+            </label>
+            <label class="control-row">
+              <span>ギャップ</span>
+              <span class="range-control">
+                <input id="gap" type="range" min="0" max="30" value="7" />
+                <output id="gapValue" for="gap">7</output>
+              </span>
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>BACKGROUND</legend>
+            <div class="background-options">
+              <label>
+                <input type="radio" name="background" value="#050607" checked />
+                <span class="swatch swatch-black" aria-hidden="true"></span>
+                ブラック
+              </label>
+              <label>
+                <input type="radio" name="background" value="#ffffff" />
+                <span class="swatch swatch-white" aria-hidden="true"></span>
+                ホワイト
+              </label>
+              <label>
+                <input type="radio" name="background" value="#00ff00" />
+                <span class="swatch swatch-green" aria-hidden="true"></span>
+                クロマキー
+              </label>
+            </div>
+          </fieldset>
+
+          <button class="launch-button" id="launchButton" type="button">
+            <span class="pip-symbol" aria-hidden="true"></span>
+            <span id="launchLabel">PiPで表示</span>
+          </button>
+          <p class="status" id="status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <footer>
+        <span>PiP RETICLE</span>
+        <span>ブラウザ内で完結・データ送信なし</span>
+      </footer>
+    </main>
+
+    <video id="pipVideo" muted playsinline aria-hidden="true"></video>
+  </body>
+</html>
